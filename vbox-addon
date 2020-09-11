@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Name: sharefolder
+# Desc: 设置目录共享
+# Date: 2020-04-16 by yongirl
+
+clear
+
+# Check if user is root
+if [ $(id -u) != "0" ]; then
+  echo "Error: You must be root to run this script."
+  exit 1
+fi
+
+# Header prompt
+echo "================================================================================"
+echo "share folder"
+echo "================================================================================"
+
+
+# 安装需要的库
+yum -y install kernel-devel
+yum -y install bzip2
+yum -y install gcc
+
+
+#挂载 增强工具
+mkdir /mnt/cdrom
+mount /dev/cdrom /mnt/cdrom
+
+#安装 增强工具
+/mnt/cdrom/VBoxLinuxAdditions.run
+
+echo "set ok"
+
+exit 0
