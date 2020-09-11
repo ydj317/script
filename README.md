@@ -23,3 +23,10 @@ chmod +x vbox-*
 挂载共享文件夹
 mount -f vboxfs www /mnt/www
 ```
+
+## docker
+```
+curl -k https://raw.githubusercontent.com/ydj317/script/master/docker-setup -o ~/docker-setup
+chmod +x docker-setup
+./docker-setup
+```
