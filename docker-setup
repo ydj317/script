@@ -62,6 +62,10 @@ chmod 644 /etc/systemd/system/docker.service.d/override.conf
 systemctl daemon-reload
 systemctl restart docker.service
 
+#防火墙开启
+firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="192.168.56.1" port protocol="tcp" port="2375" accept"
+firewall-cmd --reload
+
 
 curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
