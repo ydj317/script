@@ -45,6 +45,24 @@ yum -y install docker-ce docker-ce-cli containerd.io
 systemctl enable docker
 systemctl start docker
 
+#开启远程控制
+mkdir /etc/systemd/system/docker.service.d
+chmod 755 /etc/systemd/system/docker.service.d
+
+echo "[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375" > /etc/systemd/system/docker.service.d/override.conf
+
+chmod 644 /etc/systemd/system/docker.service.d/override.conf
+
+#echo "{
+#    \"insecure-registries\":[\"10.5.1.173:5000\"] 
+#}" > /etc/docker/daemon.json
+
+systemctl daemon-reload
+systemctl restart docker.service
+
+
 curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 chmod +x /usr/local/bin/docker-compose
